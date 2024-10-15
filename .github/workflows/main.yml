@@ -1,0 +1,24 @@
+name: Renovate
+
+on:
+  push:
+    branches:
+      - master  # Change this to your desired branch, if necessary
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Specify the Node.js version you need
+
+      - name: Install Renovate
+        run: npm install -g renovate
+
+      - name: Run Renovate
+        run: LOG_FORMAT=json LOG_LEVEL=debug renovate --platform=local --require-config=ignored
